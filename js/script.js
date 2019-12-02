@@ -1,96 +1,88 @@
-(function ($, window) {
- 
-    var App = App || {
-        init: function () {
-            $('.js-toggle-search').on('click', function () {
-                $('.js-search').toggleClass('is-visible');
-            });
- 
-            $('.js-next a').on('click', function (e) {
-                $(infinite_scroll.contentSelector).infinitescroll(infinite_scroll);
- 
-                var $body = $('body');
- 
-                $body.scrollTop($body.scrollTop() - 1);
- 
-                e.preventDefault();
-            })
- 
-            $(window).keydown(function (event) {
-                if (event.keyCode == 27) {
-                    if ($('.js-search').attr('class').indexOf('is-visible') > 0) {
-                        $('.js-search').removeClass('is-visible');
-                    }
-                }
-            });
- 
-            $('.js-search .text-input').keydown(function (event) {
-                if (event.keyCode == 13) {
-                    location.href = 'https://www.google.com/search?q=site:yumemor.com ' + $(this).val();
-                    return false;
-                }
-            })
-        }
+// declaraction of document.ready() function.
+(function () {
+    var ie = !!(window.attachEvent && !window.opera);
+    var wk = /webkit\/(\d+)/i.test(navigator.userAgent) && (RegExp.$1 < 525);
+    var fn = [];
+    var run = function () {
+        for (var i = 0; i < fn.length; i++) fn[i]();
     };
- 
+    var d = document;
+    d.ready = function (f) {
+        if (!ie && !wk && d.addEventListener)
+            return d.addEventListener('DOMContentLoaded', f, false);
+        if (fn.push(f) > 1) return;
+        if (ie)
+            (function () {
+                try {
+                    d.documentElement.doScroll('left');
+                    run();
+                } catch (err) {
+                    setTimeout(arguments.callee, 0);
+                }
+            })();
+        else if (wk)
+            var t = setInterval(function () {
+                if (/^(loaded|complete)$/.test(d.readyState))
+                    clearInterval(t), run();
+            }, 0);
+    };
+})();
 
-    $(App.init);
 
-    $(function(){
- 
-        var navToggle = $('#nav-toggle'),
-            nav = $('nav'),
-            navLinks = nav.find('a');
- 
-        navToggle.on('click', function () {
-            navToggle.toggleClass('active');
-            nav.toggleClass('open');
-            return false;
-        });
-        navLinks.on('click', function () {
-            navToggle.toggleClass('active');
-            nav.toggleClass('open');
-        });
- 
-        $(document).on('click', function () {
-            if (nav.hasClass('open')) {
-                navToggle.toggleClass('active');
-                nav.toggleClass('open');
-            }
-        });
- 
-        $('.btn-slide').click(function () {
-            $('#panel').slideToggle("slow");
-            $(this).toggleClass("active");
-            return false;
-        });
- 
-        $(window).scroll(function () {
-            var header = $('header');
- 
-            if ($(this).scrollTop() > 1) {
-                header.addClass("scrolled");
+document.ready(
+    // toggleTheme function.
+    // this script shouldn't be changed.
+    function () {
+        var _Blog = window._Blog || {};
+        const currentTheme = window.localStorage && window.localStorage.getItem('theme');
+        const isDark = currentTheme === 'dark';
+        if (isDark) {
+            document.getElementById("switch_default").checked = true;
+            // mobile
+            document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+        } else {
+            document.getElementById("switch_default").checked = false;
+            // mobile
+            document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+        }
+        _Blog.toggleTheme = function () {
+            if (isDark) {
+                document.getElementsByTagName('body')[0].classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
             } else {
-                header.removeClass("scrolled");
+                document.getElementsByTagName('body')[0].classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
             }
-        });
- 
-        $("#social-share").click(function () {
-            $("#social").toggleClass("visible").slideToggle(200);
-        });
- 
-        if ($('.welcome')[0]) {
-            $('.author-info').hide();
-            $('span.info-edit').click(function () {
-                $('.author-info').toggle();
-            });
-        }
+            document.getElementsByClassName('toggleBtn')[0].addEventListener('click', () => {
+                if (document.getElementsByTagName('body')[0].classList.contains('dark-theme')) {
+                    document.getElementsByTagName('body')[0].classList.remove('dark-theme');
+                } else {
+                    document.getElementsByTagName('body')[0].classList.add('dark-theme');
+                }
+                window.localStorage &&
+                window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light',)
+            })
+            // moblie
+            document.getElementById('mobile-toggle-theme').addEventListener('click', () => {
+                if (document.getElementsByTagName('body')[0].classList.contains('dark-theme')) {
+                    document.getElementsByTagName('body')[0].classList.remove('dark-theme');
+                    // mobile
+                    document.getElementById("mobile-toggle-theme").innerText = "· Light"
 
-        var bannerNode = $('.top-image');
-        if(bannerNode.data('enable')){
-            var index = parseInt((Math.random() * 4) + 1);
-            bannerNode.attr('style','background-image:url(/banner/'+index+'.jpg)');
-        }
-    })
+                } else {
+                    document.getElementsByTagName('body')[0].classList.add('dark-theme');
+                    // mobile
+                    document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+                }
+                window.localStorage &&
+                window.localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light',)
+            })
+        };
+        _Blog.toggleTheme();
 
-}(jQuery, window));
+        // ready function.
+
+    }
+);
