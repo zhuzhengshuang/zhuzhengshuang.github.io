@@ -10,7 +10,7 @@
 
 
 
-<title>泰戈尔《飞鸟集》 | 个人博客</title>
+<title>hexo搭建问题及解决 | 个人博客</title>
 
 
 
@@ -110,14 +110,14 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">泰戈尔《飞鸟集》</h1>
+            <h1 class="post-title">hexo搭建问题及解决</h1>
             
                 <div class="post-meta">
                     
 
                     
                         <span class="post-time">
-                        Date: <a href="#">November 28, 2019&nbsp;&nbsp;12:23:21</a>
+                        Date: <a href="#">December 4, 2019&nbsp;&nbsp;18:20:58</a>
                         </span>
                     
                     
@@ -126,10 +126,26 @@
         </header>
 
         <div class="post-content">
-            <blockquote>
-<p>If you shed tears when you miss the sun,you also miss the stars.</p>
-</blockquote>
-<p>译文：如果你因失去了太阳而流泪，那么你也将失去群星。</p>
+            <p> <strong>1.deploy 部分的远程配置</strong></p>
+<p>‘’‘</p>
+<p>deploy:</p>
+<p>​    type:github</p>
+<p>​    repository:git(githubSSH后面的东西)</p>
+<p>’‘’</p>
+<p>如果出现以下报错<img src="C:%5CUsers%5CU201913357ZHU%5CPictures%5CScreenshots%5C%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE(2)_LI.jpg" alt="error1"></p>
+<p>则按照run提示打开Git Bash，输入两行代码配置全局用户。</p>
+<p><strong>2.更换主题</strong></p>
+<p>在hexo官网上有很多主题可供下载，网址：<a href="https://hexo.io/themes/" target="_blank" rel="noopener">hexo theme</a></p>
+<p>选好主题后，将其在GitHub中的网址进行复制</p>
+<p><img src="C:%5CUsers%5CU201913357ZHU%5CPictures%5CScreenshots%5C%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE(7)_LI.jpg" alt="theme1"></p>
+<p><img src="C:%5CUsers%5CU201913357ZHU%5CPictures%5CScreenshots%5C%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE(8)_LI.jpg" alt="theme2"></p>
+<p>打开hexo,找到theme,git here,输入以下代码</p>
+<p>‘git clone +刚复制的地址’</p>
+<p>下载完后，在hexo config.yml theme中进行配置</p>
+<p>配置过程中一定要注意不要乱加空格键，否则会出现以下报错</p>
+<p><img src="C:%5CUsers%5CU201913357ZHU%5CPictures%5CScreenshots%5C%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE(6)_LI.jpg" alt="error2"></p>
+<p><strong>3.配置问题</strong></p>
+<p>在“config.yml ”中进行配置</p>
 
         </div>
 
@@ -144,7 +160,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://yoursite.com/2019/11/28/%E9%9A%8F%E6%83%B3/">http://yoursite.com/2019/11/28/%E9%9A%8F%E6%83%B3/</a></span>
+                        <span><a href="http://yoursite.com/2019/12/04/hexo%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">http://yoursite.com/2019/12/04/hexo%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/</a></span>
                     </p>
                 
                 
@@ -177,10 +193,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2019/12/04/hexo%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/">hexo搭建问题及解决</a>
             
-            
-            <a class="next" rel="next" href="/2019/11/24/hello-world/">Hello World</a>
+            <a class="next" rel="next" href="/2019/11/28/%E9%9A%8F%E6%83%B3/">泰戈尔《飞鸟集》</a>
             
         </section>
 
